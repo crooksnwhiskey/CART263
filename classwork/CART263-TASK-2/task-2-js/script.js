@@ -8,8 +8,8 @@ function setup() {
     /* 1: all paragraph elements */
     /***CODE
      */
-    let paragraphFinder = document.querySelectorAll("p")
-    console.log(paragraphFinder)
+    // let paragraphFinder = document.querySelectorAll("p")
+    // console.log(paragraphFinder)
 
     /***OUTPUT: 
      * [p#1, p#2.img-descript, p#3.img-descript, p#4.img-descript, p#5.img-descript, p#6.img-descript, p#7.img-descript, p#8.img-descript, p#9.img-descript]
@@ -19,8 +19,8 @@ function setup() {
     /*************************************** */
     /* 2: only the first paragraph element */
     /***CODE */
-    let paragraphFinder2 = document.getElementById("1")
-    console.log(paragraphFinder2)
+    // let paragraphFinder2 = document.getElementById("1")
+    // console.log(paragraphFinder2)
     /***OUTPUT: 
      * <p id="1">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias perspiciatis blanditiis, et
@@ -35,8 +35,8 @@ function setup() {
     /*************************************** */
     /* 3: all elements with the class inner-container */
     /***CODE */
-    let paragraphFinder3 = document.getElementsByClassName("inner-container")
-    console.log(paragraphFinder3)
+    // let paragraphFinder3 = document.getElementsByClassName("inner-container")
+    // console.log(paragraphFinder3)
     /***OUTPUT: 
      * HTMLCollection(8) [div.inner-container, div.inner-container, div.inner-container, div.inner-container,
      *  div.inner-container, div.inner-container, div.inner-container, div.inner-container]
@@ -46,8 +46,8 @@ function setup() {
     /*************************************** */
     /* 4: the last image element inside the element that has the class img-container */
     /***CODE */
-    let paragraphFinder4 = document.getElementsByClassName("img-container")[7]
-    console.log(paragraphFinder4)
+    // let paragraphFinder4 = document.getElementsByClassName("img-container")[7]
+    // console.log(paragraphFinder4)
     /***OUTPUT: 
      * <div class="img-container">
                         <img class="img-image" src="task-2-images/seventeen.png">
@@ -60,9 +60,9 @@ function setup() {
     /* 5B: length of the list in 5A */
     /* 5C: the text content of the first element in the list from 5A */
     /***CODE */
-    console.log(document.querySelectorAll("h2"))
-    console.log(document.querySelectorAll("h2").length)
-    console.log(document.querySelectorAll("h2")[0])
+    // console.log(document.querySelectorAll("h2"))
+    // console.log(document.querySelectorAll("h2").length)
+    // console.log(document.querySelectorAll("h2")[0])
     /***OUTPUT: 
      * 
     NodeList [h2]0: h2length: 1[[Prototype]]: NodeList
@@ -77,7 +77,7 @@ function setup() {
     /*************************************** */
     /* 6: the element with id name parent */
     /***CODE */
-    console.log(document.getElementById("parent"))
+    // console.log(document.getElementById("parent"))
     /***OUTPUT: 
      *  <section id="parent">
             <div class="inner-container">
@@ -218,19 +218,19 @@ function setup() {
     // let firstImgElem = document.querySelector("img")
     // firstImgElem.src = "task-2-images/seven.png"
     /*************************************** */
-    /* 4: Select the third paragraph element on the page and 
+    /* 4: Select the third paragraph element on the page and
     replace the content (within the paragraph) to be an h2 element which contains the text `TEST 123`
     /***CODE */
     // let thirdParaElem = document.getElementById("3")
     // thirdParaElem.innerHTML = "<h2> TEST 123 </h2>"
     /*************************************** */
-    /* 5: Select the fourth paragraph element on the page and 
+    /* 5: Select the fourth paragraph element on the page and
     add to the existing content an h2 element containing the text `TEST 123`
     /***CODE */
     // let fourthParaElem = document.getElementById("4")
     // fourthParaElem.innerHTML = fourthParaElem.innerHTML + "<h2> TEST 123 </h2>"
     /*************************************** */
-    /* 6: Select the fifth paragraph element on the page and add to the existing content 
+    /* 6: Select the fifth paragraph element on the page and add to the existing content
     an img element that holds `one.png`, and add the class newStyle to said paragraph element.
     /***CODE */
     // let fifthParaElem = document.getElementById("5")
@@ -238,7 +238,7 @@ function setup() {
 
 
     /*************************************** */
-    /* 7: Add the following array variable: let colors = ['red','blue','green','orange'];, 
+    /* 7: Add the following array variable: let colors = ['red','blue','green','orange'];,
     then access all elements with class name inner-container and save to a variable called `innerContainers`. 
     Next, iterate over the colors array, and for each color: 
     assign the element from innerContainers variable with the same index 
@@ -260,8 +260,12 @@ function setup() {
     /*************************************** */
     /* 1: NEW PARAGRAPHS */
     /* 1A: Access all paragraph elements, and store the result in a variable called: allPTagsThree */
+    let allPTagsThree = document.querySelectorAll('p')
+    console.log(allPTagsThree)
     /* 1B: Create a function:function customCreateElement(parent){ //body } */
+
     /* 1C:  In the body of customCreateElement create a new parargraph element*/
+
     /* 1D:  Set the text of this element to be : `using create Element`*/
     /* 1E:  Set the background of this paragraph element to be green */
     /* 1F:  Set the color of the text in this paragraph element to be white */
@@ -269,7 +273,13 @@ function setup() {
     /* 1H: Iterate through the allPTagsThree array and call customCreateElement(), 
     passing the current allPTagsThree element as the parent with each iteration.*/
     /***CODE */
-
+    function customCreateElement(parent) {
+        let newElement = document.createElement('p')
+        newElement.innerHTML = "using Create Element"
+        newElement.style.background = "green"
+        newElement.style.color = "white"
+        parent.appendChild(newElement)
+    }
 
     /***EXPLANATION::
      * 
@@ -319,7 +329,6 @@ function setup() {
         when dividing by three. */
 
     /***CODE */
-
 
     /***EXPLANATION::
      * 
