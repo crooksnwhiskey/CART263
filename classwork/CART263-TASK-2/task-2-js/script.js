@@ -260,8 +260,8 @@ function setup() {
     /*************************************** */
     /* 1: NEW PARAGRAPHS */
     /* 1A: Access all paragraph elements, and store the result in a variable called: allPTagsThree */
-    let allPTagsThree = document.querySelectorAll('p')
-    console.log(allPTagsThree)
+    // let allPTagsThree = document.querySelectorAll('p')
+    // console.log(allPTagsThree)
     /* 1B: Create a function:function customCreateElement(parent){ //body } */
 
     /* 1C:  In the body of customCreateElement create a new parargraph element*/
