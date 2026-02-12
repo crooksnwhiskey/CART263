@@ -1,1 +1,0 @@
-simple game like pong, air hockey etc, but popups block players mouse movements so they lose the game.
