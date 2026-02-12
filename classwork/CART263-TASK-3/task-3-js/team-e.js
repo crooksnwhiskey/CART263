@@ -24,7 +24,63 @@ function setup_E() {
    * **/
 
   function aniA(parentCanvas) {
-    console.log("in ani-A -teamE");
+    let clickAmount = 0
+
+    let someArray = [];
+
+    let button = document.createElement("div");
+    button.classList.add("team_e_box");
+    button.textContent = "CLICK";
+    parentCanvas.appendChild(button);
+    button.style.zIndex = 100
+
+    setStuff();
+    //add event listener to the button
+    button.addEventListener("click", changeGridHandler);
+
+    function setStuff() {
+      //offset
+      let offS = 20;
+      //make a grid of circles - STATIC
+      for (let i = 0; i < 24; i++) {
+        for (let j = 0; j < 24; j++) {
+          //make some shapes ;) - using divs
+          let rect = document.createElement("div");
+          rect.classList.add("TEAM_E_RECT");
+          rect.style.width = `1px`;
+          rect.style.height = `1px`;
+          rect.style.left = offS + i * 20 + "px";
+          rect.style.top = offS + j * 20 + "px";
+          parentCanvas.appendChild(rect);
+          parentCanvas.style.overflow = "hidden"
+          someArray.push(rect);
+        }
+      }
+    }
+    function changeGridHandler() {
+      if (clickAmount < someArray.length - 2) {
+        clickAmount++;
+      } else {
+        clickAmount = 0;
+      }
+
+      for (let i = 0; i < someArray.length; i++) {
+        if (i % clickAmount === 0) {
+          someArray[i].style.width = `${(Math.random([1], [20]))}px`
+        } else {
+          if (i % clickAmount === 2) {
+            someArray[i].style.background = `rgb(${(Math.random() * 255)},${(Math.random() * 255)},${(Math.random() * 255)}`
+          }
+          else {
+            someArray[i].style.width = `${(Math.random() * 100)}px`
+            someArray[i].style.height = `${(Math.random() * 100)}px`
+            someArray[i].style.background = `rgb(${(Math.random() * 20)},${(Math.random() * 20)},${(Math.random() * 255)}`
+            someArray[i].style.left = `${(Math.random() * 375)}px`
+          }
+
+        }
+      }
+    }
   }
 
 
