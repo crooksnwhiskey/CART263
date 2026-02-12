@@ -78,17 +78,48 @@ window.onload = function () {
         flower.flowerStemDiv.style.width = flower.stemThickness + "px";
         flower.flowerStemDiv.style.height = flower.stemLength + "px";
         flower.flowerStemDiv.style.background = `rgb(
-            ${flower.stemColor.r},
-            ${flower.stemColor.g},
-            ${flower.stemColor.b}
-            )`;
+        ${flower.stemColor.r},
+        ${flower.stemColor.g},
+        ${flower.stemColor.b}
+        )`;
         flower.flowerStemDiv.style.left = flower.x + "px";
         flower.flowerStemDiv.style.top = flower.y - flower.stemLength + "px";
+        //add to the DOM
         document.getElementsByClassName("grass")[0].appendChild(flower.flowerStemDiv);
 
+        flower.flowerPetalDiv.classList.add("petal");
+        flower.flowerPetalDiv.style.width = flower.size + "px";
+        flower.flowerPetalDiv.style.height = flower.size + "px";
+        flower.flowerPetalDiv.style.borderRadius = flower.size + "px"
+
+        flower.flowerPetalDiv.style.background = `rgb(
+        ${flower.centreColor.r},
+        ${flower.centreColor.g},
+        ${flower.centreColor.b}
+        )`;
+        flower.flowerPetalDiv.style.left = (flower.x - flower.size / 2) + "px";
+        flower.flowerPetalDiv.style.top = (flower.y - flower.stemLength - flower.size / 2) + "px";
+        flower.flowerPetalDiv.style.borderWidth = flower.petalThickness + "px";
+        flower.flowerPetalDiv.style.borderColor = `rgb(
+        ${flower.petalColor.r},
+        ${flower.petalColor.g},
+        ${flower.petalColor.b}
+        )`;
+        //add to the DOM
+        document.getElementsByClassName("grass")[0].appendChild(flower.flowerPetalDiv);
     }
 
-    createAndRenderTheGarden();
+    createAndRenderTheGarden(); {
+        // add numFlowers at one time
+        for (let i = 0; i < garden.numFlowers; i++) {
+            garden.flowers.push(createFlower());
+        }
+
+        for (let i = 0; i < garden.flowers.length; i++) {
+            renderFlower(garden.flowers[i]);
+
+        }
+    }
 
     let first_flower = createFlower();
     renderFlower(first_flower);
