@@ -4,7 +4,7 @@ window.onload = function () {
         // An array to store the individual flowers
         flowers: [],
         // How many flowers in the garden
-        numFlowers: 200,
+        numFlowers: 20,
 
         /*grass object */
         grass: {
@@ -112,16 +112,16 @@ window.onload = function () {
     createAndRenderTheGarden(); {
         // add numFlowers at one time
         for (let i = 0; i < garden.numFlowers; i++) {
-            garden.flowers.push(createFlower());
+            let flower = new Flower();
+            garden.flowers.push(flower);
         }
 
         for (let i = 0; i < garden.flowers.length; i++) {
-            renderFlower(garden.flowers[i]);
+            garden.flowers[i].renderFlower();
 
         }
     }
 
-    let first_flower = createFlower();
-    renderFlower(first_flower);
+    createAndRenderTheGarden();
 
 }
