@@ -73,11 +73,25 @@ window.onload = function () {
       garden.flowers[i].renderFlower();
     }
 
-    setInterval((e) => {
-      let states = ["sunny", "raining", "cloudy"];
-      weather.state = states[Math.floor(Math.random() * states.length)];
-      weather.renderWeather();
-    }, 5000);
+    setInterval(() => {
+      if (weather.state === "sunny") {
+        let options = ["raining", "cloudy"];
+        weather.state = options[Math.floor(Math.random() * options.length)];
+        weather.renderWeather();
+      }
+
+      else if (weather.states === "raining") {
+        let options = ["sunny", "cloudy"];
+        weather.state = options[Math.floor(Math.random() * options.length)];
+        weather.renderWeather();
+      }
+
+      else {
+        let options = ["sunny", "raining"];
+        weather.state = options[Math.floor(Math.random() * options.length)];
+        weather.renderWeather();
+      }
+    }, 1000);
     weather.renderWeather();
 
   }
