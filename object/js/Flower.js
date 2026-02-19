@@ -3,13 +3,14 @@
 class Flower {
 
 
-    constructor() {
+    constructor(x, y, size, stemLength, petalColor) {
+
         // We write instructions to set up a Flower here
         // Position and size information
-        this.x = Math.random() * (window.innerWidth);
-        this.y = Math.random() * 120;
-        this.size = 40;
-        this.stemLength = 75;
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.stemLength = stemLength;
         this.stemThickness = 10;
         this.petalThickness = 8;
         this.flowerStemDiv = document.createElement("div");
@@ -21,16 +22,38 @@ class Flower {
             g: 150,
             b: 50,
         };
-        this.petalColor = {
-            r: 200,
-            g: 50,
-            b: 50,
-        };
+
+        this.petalColor = petalColor;
+
         this.centreColor = {
             r: 50,
             g: 0,
             b: 0,
         };
+
+        //add event listener and the call back in constructor
+        this.flowerStemDiv.addEventListener("click", growStem);
+        let self = this;//keep a copy of 'this'
+
+        function growStem(e) {
+            console.log(self);
+            //this is the div :)
+            //console.log(self);
+            self.stemLength = self.stemLength + 10;
+
+            //update the actual div...
+            self.flowerStemDiv.style.height = self.stemLength + "px";
+            self.flowerStemDiv.style.top = self.y - self.stemLength + "px";
+
+            // and also the petal element needs to move up
+            self.flowerPetalDiv.style.top =
+                self.y - self.stemLength - self.size / 2 + "px";
+        }
+
+
+
+
+
     }
 
     renderFlower() {
