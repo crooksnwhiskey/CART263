@@ -1,1 +1,13 @@
-From the get-go this teams project stood out because of their unique approach to focus on audio.
+# Project 1 Response
+
+## link to project: https://pansyqwq.github.io/Cart263_Project/263-Midterm/
+
+Alex Chardon
+
+From the get-go this teams project stood out because of their unique approach to focus on audio. Most of the other teams neglected audio, so it was refreshing to see a presentation that was centered around it. Although their project was centered around sound, that doesn't mean that their visuals were lacklustre at all. They had a very solid combination of visuals and audio that worked together to create a cohesive experience.
+The project was from what I understood, a tribute to an artist by the name of Wowaka. This artist had a very unique art style that would often show up on thier album covers, which is where this team drew their visual design inspiration from. They took some visuals related to the artist, and made them react to the audio of the artists songs playing behind them. I didn't understand a lot of the code, but I think how this was achieved was by linking the scale of the individual elements of the images to the amplitude of the backing track, so the image appears to "dance" with the song. 
+They did 2 songs, and what really made the first one next level was the fact that they made the scale of the image centered around a vector point, so the image looked like it was almost convulsing. This worked very well because the image that they chose was a heart, which with the convulsions made it seem so alive.
+The second song that they did, they took a differrent approach. Instead of having their image react to the music the same way, they changed it up and made it so that the different parts of the image reacted to the different frequencies of the song, making the image feel less whole, and more like a multi-stage artwork.
+The overall look of the project was pretty minimal in the best way possible. It was easy to navigate and understand, and it didnt feel "cheap". The effort was clearly there.
+If I had to make some minor suggestions, I would recommend adding some css transitions when you switch songs just so it can feel more seamless, and maybe have the songs start at 50% volume rather than 100%, because it was quite loud the first time I listened to it on my own.
+I tried to learn something frome their code, and the thing that I found most compelling was how the gets calculated. From what I understand, instead of just using its raw values, the program calculates the root mean square, which was an entirely new concept for me so im glad I was able to pick something up. I don't fully understand it, however I think it is useful to make the animations of the images look smoother when reacting to the sound.
