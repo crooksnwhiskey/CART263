@@ -1,5 +1,5 @@
 class CircularObj {
-  constructor(x, y, radius, f_color, s_color, context) {
+  constructor(x, y, radius, f_color, s_color, context, centerX, centerY, orbitRadius) {
     // We write instructions to set up a Flower here
     // Position and size information
     this.x = x;
@@ -10,6 +10,13 @@ class CircularObj {
     this.startAngle = 0;
     this.endAngle = Math.PI * 2; //full rotation
     this.context = context;
+    this.angle = Math.random() * Math.PI * 2; // Random starting angle
+    // its so if the value is "bad" its liek alr i am fine with that and changes
+    this.centerX = centerX || 200;
+    this.centerY = centerY || 150;
+    this.orbitRadius = orbitRadius = 3;
+    this.beat = 0
+    this.maxRadius = radius
   }
 
   display() {
@@ -31,8 +38,13 @@ class CircularObj {
   }
 
   update() {
-    //update circle
-    //this.x += 1;
-    //console.log("circle update");
+    // Orbital animation
+    this.angle += 0.02;
+    this.x = this.centerX + Math.cos(this.angle) * this.orbitRadius;
+    this.y = this.centerY + Math.sin(this.angle) * this.orbitRadius;
+
+    // Pulsing radius
+    this.beat += 0.05;
+    this.radius = this.maxRadius + Math.sin(this.beat) * 5;
   }
 }
