@@ -1,4 +1,6 @@
 import * as THREE from 'three';
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+const loader = new GLTFLoader();
 
 // Planet class for Team E
 export class PlanetE {
@@ -8,15 +10,13 @@ export class PlanetE {
         this.orbitSpeed = orbitSpeed;
         this.angle = Math.random() * Math.PI * 2;
 
-        //Create planet group
-        this.group = new THREE.Group()
+        // Create planet group
+        this.group = new THREE.Group();
 
         // Create planet
         //STEP 1:
 
-        //TODO: Create a planet using THREE.SphereGeometry (Radius must be between 1.5 and 2).
         const planetGeometry = new THREE.SphereGeometry(1.8, 32, 32);
-        //TODO: Give it a custom material using THREE.MeshStandardMaterial.
         const planetMaterial = new THREE.MeshStandardMaterial({
             color: 0x4169E1,
             roughness: 0.5,
@@ -24,26 +24,57 @@ export class PlanetE {
             transparent: true,
             opacity: 0.2
         });
-        //TODO: Use castShadow and receiveShadow on the mesh and all future ones so they can cast and receive shadows.
-        //TODO: Add the planet mesh to the planet group.
+
         this.planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
         this.planetMesh.castShadow = true;
         this.planetMesh.receiveShadow = true;
         this.group.add(this.planetMesh);
 
-
         //STEP 2: 
-        //TODO: Add from 1 to 3 orbiting moons to the planet group. 
-        //TODO: The moons should rotate around the planet just like the planet group rotates around the Sun.
+        this.moons = [];
+        const moonMaterial = new THREE.MeshStandardMaterial({
+            color: 0xF28390,
+            roughness: 1,
+            metalness: 0.2,
+            transparent: true,
+            opacity: 0.8
+        });
+
+        for (let i = 0; i < 3; i++) {
+            // cool size stuff so you can tell what moon is what, also effects distance with i 
+            const moonGeo = new THREE.SphereGeometry(0.4 + 0.1 * i, 16, 16);
+            const moonMesh = new THREE.Mesh(moonGeo, moonMaterial);
+            moonMesh.castShadow = true;
+            moonMesh.receiveShadow = true;
+
+            const moonOrbit = new THREE.Group();
+            const moonRadius = 3 + i * 1.5;
+            moonMesh.position.set(moonRadius, 0, 0);
+            moonOrbit.add(moonMesh);
+            this.group.add(moonOrbit);
+
+            this.moons.push({ orbit: moonOrbit, speed: 0.1 + 0.05 * i });
+        }
 
         //STEP 3:
-        //TODO: Load Blender models to populate the planet with multiple props and critters by adding them to the planet group.
-        //TODO: Make sure to rotate the models so they are oriented correctly relative to the surface of the planet.
+        loader.load('/models/teamE/bird.glb', (gltf) => {
+            const bird = gltf.scene;
+            bird.position.set(0, 1.8, 0);
+            bird.scale.set(0.6, 0.6, 0.6);
+            this.group.add(bird);
+            bird.name = "birdy";
+        });
+
+        loader.load('/models/teamE/critter.glb', (gltf) => {
+            const critter = gltf.scene;
+            critter.position.set(0, -1.8, 0);
+            critter.scale.set(2, 2, 2);
+            critter.rotation.x = Math.PI;
+            this.group.add(critter);
+            critter.name = "critter";
+        });
 
         //STEP 4:
-        //TODO: Use raycasting in the click() method below to detect clicks on the models, and make an animation happen when a model is clicked.
-        //TODO: Use your imagination and creativity!
-
         this.scene.add(this.group);
     }
 
@@ -53,14 +84,38 @@ export class PlanetE {
         this.group.position.x = Math.cos(this.angle) * this.orbitRadius;
         this.group.position.z = Math.sin(this.angle) * this.orbitRadius;
 
-        // Rotate planet
+        // Rotate planet itself
         this.group.rotation.y += delta * 5;
 
-        //TODO: Do the moon orbits and the model animations here.
+
+        this.moons.forEach(moon => {
+            moon.orbit.rotation.y += moon.speed * delta;
+        });
     }
 
     click(mouse, scene, camera) {
-        //TODO: Do the raycasting here.
+        const raycaster = new THREE.Raycaster();
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(this.group.children, true);
+
+        if (intersects.length > 0) {
+            let target = intersects[0].object;
+            while (target.parent && target.name !== "birdy" && target.name !== "critter") {
+                target = target.parent;
+            }
+
+            if (target.name === "birdy" || target.name === "critter") {
+                const originalScale = target.scale.x;
+                const originalRotation = target.rotation.y;
+
+                target.scale.set(originalScale * 1.5, originalScale * 1.5, originalScale * 1.5);
+                target.rotation.y += Math.PI;
+
+                setTimeout(() => {
+                    target.scale.set(originalScale, originalScale, originalScale);
+                    target.rotation.y = originalRotation;
+                }, 300);
+            }
+        }
     }
 }
-
